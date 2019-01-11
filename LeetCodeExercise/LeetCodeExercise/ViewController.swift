@@ -13,7 +13,60 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+//        print(self .longestCommonPrefix(["aa","a"]))
+        print(self.isValid(""))
     }
+    //MARK:合并两个有序链表
+//    func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+//        var mergeList:ListNode
+//        while l1?.next &&  {
+//            <#code#>
+//        }
+//    }
+    
+    //MARK:有效的括号
+    func isValid(_ s: String) -> Bool {
+        var push:[String] = []
+        var lastSym:String = ""
+        for char in s {
+            switch char{
+            case "(",
+                 "{",
+                 "[":
+                push.append(String(char))
+                break
+            case ")":
+                lastSym = push.last ?? ""
+                if lastSym != "("{
+                    return false
+                }
+                push.removeLast()
+                break
+            case "}":
+                lastSym = push.last ?? ""
+                if lastSym != "{"{
+                    return false
+                }
+                push.removeLast()
+                break
+            case "]":
+                lastSym = push.last ?? ""
+                if lastSym != "["{
+                    return false
+                }
+                push.removeLast()
+                break
+            default:
+                break
+            }
+        }
+        if push.count != 0 {
+            return false
+        }else{
+            return true
+        }
+    }
+    
     //MARK:两数之和
     func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         for i in 0 ..< nums.count {
@@ -148,6 +201,41 @@ class ViewController: UIViewController {
         }
         return sum
     }
+    //MARK:最长公共前缀
+    //待优化
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        if strs.isEmpty {
+            return ""
+        }else if strs.count == 1{
+            return strs.first ?? ""
+        }else{
+            var preStr = ""
+            var tempStr = ""
+            var flag = 0
+            for char in strs.first ?? "" {
+                tempStr.append(char)
+                for str in strs{
+                    let subStr = String(str[..<str.index(str.startIndex, offsetBy: (tempStr.count > str.count ? str.count : tempStr.count))])
+                    if (subStr != tempStr){
+                        flag = 1
+                    }
+                }
+                if (flag == 1){
+                    return preStr
+                }
+                preStr.append(char)
+            }
+            return preStr
+        }
+    }
+}
 
+public class ListNode {
+    public var val: Int
+    public var next: ListNode?
+    public init(_ val: Int) {
+        self.val = val
+        self.next = nil
+    }
 }
 
