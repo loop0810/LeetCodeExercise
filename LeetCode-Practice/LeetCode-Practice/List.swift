@@ -142,7 +142,40 @@ class List_Code:NSObject{
         return res
     }
     //    |1539|第K个缺失的正整数||阿里||
-    
+    func findKthPositive(_ arr: [Int], _ k: Int) -> Int {
+        //  [2,3,4,7,11]
+        //  [1,1,1,3,+6]
+//        var (left, right) = (0, arr.count - 1)
+//        while left <= right {
+//            print("\(left)" + " -> ")
+//            let mid = (left + right) / 2
+//            if arr[mid] - mid - 1 >= k {
+//                right = mid - 1
+//            } else {
+//                left = mid + 1
+//            }
+//            print(left)
+//        }
+//        return left + k
+        
+        var res = 0
+        var c = arr[arr.count - 1] - arr.count
+
+        if c < k {
+            res = arr[arr.count - 1]
+            res += k - c
+        } else {
+            for x in 0..<arr.count{
+                c = arr[x] - (x + 1)
+                if c >= k {
+                    res = arr[x]
+                    res -= (c - k + 1)
+                    break
+                }
+            }
+        }
+        return res
+    }
     //    |268|丢失的数字||阿里||
     func missingNumber(_ nums: [Int]) -> Int {
         var missingNum = nums.count
@@ -166,7 +199,31 @@ class List_Code:NSObject{
         }
     }
     //    |350|两个数组的交集||阿里||
-        
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        if nums2.count > nums1.count {
+            return intersect(nums2, nums1)
+        }
+        var dict:[Int:Int] = [:]
+        var l:[Int] = []
+        for x in nums2 {
+            let c = dict[x]
+            dict[x] = (c ?? 0) + 1
+        }
+        for y in nums1 {
+            let c = dict[y]
+            if (c ?? 0) > 0{
+                l.append(y)
+                let t = (c ?? 0) - 1
+                if t > 0 {
+                    dict[y] = t
+                } else {
+                    dict.removeValue(forKey: y)
+                }
+                
+            }
+        }
+        return l
+    }
     // MARK: --------中等--------
     // MARK: --------困难--------
     

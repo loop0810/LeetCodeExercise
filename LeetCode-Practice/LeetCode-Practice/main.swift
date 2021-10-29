@@ -7,5 +7,7 @@
 
 import Foundation
 
-print("Hello, World!")
+
+var l = List_Code()
+print(l.findKthPositive([2,3,4,7,11], 5))
 
