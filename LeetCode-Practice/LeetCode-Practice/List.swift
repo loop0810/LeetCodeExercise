@@ -145,36 +145,18 @@ class List_Code:NSObject{
     func findKthPositive(_ arr: [Int], _ k: Int) -> Int {
         //  [2,3,4,7,11]
         //  [1,1,1,3,+6]
-//        var (left, right) = (0, arr.count - 1)
-//        while left <= right {
-//            print("\(left)" + " -> ")
-//            let mid = (left + right) / 2
-//            if arr[mid] - mid - 1 >= k {
-//                right = mid - 1
-//            } else {
-//                left = mid + 1
-//            }
-//            print(left)
-//        }
-//        return left + k
-        
-        var res = 0
-        var c = arr[arr.count - 1] - arr.count
-
-        if c < k {
-            res = arr[arr.count - 1]
-            res += k - c
-        } else {
-            for x in 0..<arr.count{
-                c = arr[x] - (x + 1)
-                if c >= k {
-                    res = arr[x]
-                    res -= (c - k + 1)
-                    break
-                }
+        var (left, right) = (0, arr.count - 1)
+        while left <= right {
+            print("\(left)" + " -> ")
+            let mid = (left + right) / 2
+            if arr[mid] - mid - 1 >= k {
+                right = mid - 1
+            } else {
+                left = mid + 1
             }
+            print(left)
         }
-        return res
+        return left + k
     }
     //    |268|丢失的数字||阿里||
     func missingNumber(_ nums: [Int]) -> Int {
@@ -225,6 +207,33 @@ class List_Code:NSObject{
         return l
     }
     // MARK: --------中等--------
+//    |15|三数之和||阿里||
+//    |215|数组中的第k个最大元素||阿里||
+//    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+//        var start = 0
+//        var end = nums.count - 1
+//        var mid = 0
+//        var res = -1
+//        while start <= end {
+//            mid = (start + end) / 2
+//            if nums[mid]  {
+//                <#code#>
+//            }
+//        }
+//    }
+//    |46|全排列||阿里||
+//    |11|盛水的容器||阿里|快排|
+//    |33|搜索旋转排序数组||阿里||
+//    |56|合并区间||阿里||
+//    |64|最小路径和||阿里||
+//    |200|岛屿数量||阿里||
+//    |322|零钱兑换||阿里||
+//    |45|跳跃游戏II||阿里||
+//    |347|前K个高频元素||阿里||
+//    |153|寻找旋转排序数组中的最小值||阿里||
+//    |198|打家劫舍||阿里||
+//    |300|最长递增子序列||阿里||
+//    |54|螺旋矩阵||阿里||
     // MARK: --------困难--------
     
     
