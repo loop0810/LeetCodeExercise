@@ -8,20 +8,6 @@
 import Foundation
 
 
+var sort = Sort_Code()
 
-let obj = MinStack()
-obj.push(0)
-obj.push(-1)
-obj.push(14)
-obj.push(-5)
-obj.push(8)
-obj.push(3)
-print(obj.top())
-print(obj.getMin())
-obj.pop()
-print(obj.top())
-print(obj.getMin())
-
-obj.pop()
-print(obj.top())
-print(obj.getMin())
+print(sort.insertSort([4,5,6,1,3,2]))
