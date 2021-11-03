@@ -15,4 +15,4 @@ print(sort.insertSort([4,5,6,1,3,2]))
 
 var binary = BinarySearch_Code()
 
-print(binary.guessNumber(10))
+print(binary.searchCount([1], 1))
