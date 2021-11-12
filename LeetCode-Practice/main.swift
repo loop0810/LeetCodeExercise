@@ -20,13 +20,14 @@ import Foundation
 
 var tree = BinaryTree_Code()
 
-
+var tree5 = TreeNode(5)
 var tree3 = TreeNode(3)
 var tree2 = TreeNode(2)
-tree2.left = tree3
-tree2.right = nil
+tree2.left = nil
+tree2.right = tree5
 var tree1 = TreeNode(1)
-tree1.left = nil
-tree1.right = tree2
+tree1.left = tree2
+tree1.right = tree3
 
-tree.inorderTraversal(tree1)
+//tree.inorderTraversal(tree1)
+print(tree.binaryTreePaths(tree1))
