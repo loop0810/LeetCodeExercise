@@ -15,6 +15,7 @@
 		75A06521272AD33400B264A6 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A06520272AD33400B264A6 /* main.swift */; };
 		75A06528272AD34A00B264A6 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A06527272AD34A00B264A6 /* List.swift */; };
 		75A1D49B2732039A00DA04B2 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A1D49A2732039A00DA04B2 /* BinarySearch.swift */; };
+		75CA9C7F27423E43002982CE /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C7E27423E43002982CE /* Dynamic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +40,7 @@
 		75A06520272AD33400B264A6 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		75A06527272AD34A00B264A6 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		75A1D49A2732039A00DA04B2 /* BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
+		75CA9C7E27423E43002982CE /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 				7547CBA8272FB6E100DD5238 /* Sort.swift */,
 				7547CBAC2730DF2E00DD5238 /* Recursion.swift */,
 				75A1D49A2732039A00DA04B2 /* BinarySearch.swift */,
+				75CA9C7E27423E43002982CE /* Dynamic.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				75715CA3273DD7270000A92E /* BinaryTree.swift in Sources */,
 				7547CBAD2730DF2E00DD5238 /* Recursion.swift in Sources */,
 				751E3420272EE29800E95D1A /* Stack.swift in Sources */,
+				75CA9C7F27423E43002982CE /* Dynamic.swift in Sources */,
 				75A06521272AD33400B264A6 /* main.swift in Sources */,
 				75A06528272AD34A00B264A6 /* List.swift in Sources */,
 				75A1D49B2732039A00DA04B2 /* BinarySearch.swift in Sources */,

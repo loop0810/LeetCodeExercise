@@ -17,17 +17,16 @@ import Foundation
 //
 //print(binary.searchCount([1], 1))
 
+var re = Recursion_Code()
+print(re.fib(20))
 
-var tree = BinaryTree_Code()
+var dy = Dynamic_Code()
+//print(dy.fib(n: 20))
+//print(dy.lengthOfLIS([1,4,3,4,2,3]))
+//print(dy.minFallingPathSum([[2,1,3],[6,5,4],[7,8,9]]))
+//print(dy.longestCommonSubsequence("abcde", "ace"))
+print(dy.longestPalindromeSubseq("bbbab"))
+//print(dy.minDistance("a", "c"))
 
-var tree5 = TreeNode(5)
-var tree3 = TreeNode(3)
-var tree2 = TreeNode(2)
-tree2.left = nil
-tree2.right = tree5
-var tree1 = TreeNode(1)
-tree1.left = tree2
-tree1.right = tree3
+//var tree = BinaryTree_Code()
 
-//tree.inorderTraversal(tree1)
-print(tree.binaryTreePaths(tree1))
