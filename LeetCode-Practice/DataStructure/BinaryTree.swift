@@ -12,12 +12,14 @@ public class TreeNode {
     public var val: Int
     public var left: TreeNode?
     public var right: TreeNode?
-    public init() { self.val = 0; self.left = nil; self.right = nil; }
-    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; }
-    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?) {
+    public var next: TreeNode?
+    public init() { self.val = 0; self.left = nil; self.right = nil; self.next = nil;}
+    public init(_ val: Int) { self.val = val; self.left = nil; self.right = nil; self.next = nil;}
+    public init(_ val: Int, _ left: TreeNode?, _ right: TreeNode?,_ next:TreeNode?) {
         self.val = val
         self.left = left
         self.right = right
+        self.next = nil
     }
 }
 
@@ -214,7 +216,28 @@ class BinaryTree_Code:NSObject{
     }
     
     // MARK: - 中等
-//    |104|二叉树展开为链表||阿里||
+//    |102|二叉树的层序遍历||阿里||
+    func treeTraverse(root:TreeNode?) -> ([Int]){
+        var res:[Int] = []
+        var list:[TreeNode] = []
+        guard let root = root else { return [] }
+        list.append(root)
+        
+        while !list.isEmpty {
+            let temp = list.removeFirst()
+            
+            res.append(temp.val)
+            
+            if temp.left != nil {
+                list.append(temp.left!)
+            }
+            if temp.right != nil {
+                list.append(temp.right!)
+            }
+        }
+        return res
+    }
+//    |114|二叉树展开为链表||阿里||
     func flatten(_ root: TreeNode?) {
         guard let root = root else { return }
         
@@ -234,5 +257,215 @@ class BinaryTree_Code:NSObject{
         
         p?.right = right
     }
+//    |113|路径总和 II||阿里||
+//    |236|二叉树的最近公共祖先||阿里||
+
+//    |103|二叉树的锯齿形层序遍历||阿里||
+//    |199|二叉树的右视图||阿里||
+//    |173|二叉搜索树迭代器||阿里||
+//    |437|路径总和 III||阿里||
+//    |450|删除二叉搜索树中的节点||阿里||
+//    |687|最长同值路径||阿里||
+    
+//    |106|从中序与后序遍历序列构造二叉树||阿里||
+    func buildPostTree(_ inorder: [Int], _ postorder: [Int]) -> TreeNode? {
+        postHelper(inorder, 0, inorder.count - 1,
+                   postorder, 0, postorder.count - 1)
+    }
+    func postHelper(_ inOrder:[Int],_ inLeft:Int,_ inRight:Int,_ postOrder:[Int],_ postLeft:Int,_ postRight:Int) -> TreeNode?{
+        if postLeft > postRight {
+            return nil
+        }
+        let rootVal = postOrder[postRight]
+        var index = -1
+        
+        for x in inLeft ... inRight {
+            if inOrder[x] == rootVal {
+                index = x
+                break
+            }
+        }
+        
+        let root = TreeNode(rootVal)
+        let size = index - inLeft
+        
+        root.left = postHelper(inOrder, inLeft, index - 1,
+                               postOrder, postLeft, postLeft + size - 1)
+        root.right = postHelper(inOrder, index + 1, inRight,
+                                postOrder, postLeft + size, postRight - 1)
+        return root
+    }
+//    |105|从前序与中序遍历序列构造二叉树||阿里||
+    func buildPreTree(_ preorder: [Int], _ inorder: [Int]) -> TreeNode? {
+        return preHelper(preorder, 0, preorder.count - 1,
+                         inorder, 0, inorder.count - 1)
+    }
+    
+    func preHelper(_ preOrder:[Int],_ preLeft:Int,_ preRight:Int,_ inOrder:[Int],_ inLeft:Int,_ inRight:Int) -> TreeNode?{
+        if preLeft > preRight {
+            return nil
+        }
+        
+        let rootVal = preOrder[preLeft]
+        
+        var index = -1
+        for x in inLeft ... inRight {
+            if inOrder[x] == rootVal {
+                index = x
+                break
+            }
+        }
+        
+        let root = TreeNode(rootVal)
+        let size = index - inLeft
+        
+        root.left = preHelper(preOrder, preLeft + 1, preLeft + size,
+                              inOrder, inLeft, index - 1)
+        root.right = preHelper(preOrder, preLeft + size + 1, preRight,
+                               inOrder, index + 1, inRight)
+        
+        return root
+    }
+    
+//    |116|填充二叉树节点的右侧指针||||
+    func connect(_ root: TreeNode?) -> TreeNode? {
+        guard let root = root else { return nil }
+        connectHelper(root.left,root.right)
+        
+        return root
+    }
+    
+    func connectHelper(_ left:TreeNode?,_ right:TreeNode?){
+        if left == nil || right == nil {
+            return
+        }
+        
+        left?.next = right
+        
+        connectHelper(left?.left, left?.right)
+        connectHelper(right?.left, right?.right)
+        connectHelper(left?.right, right?.left)
+    }
+    
+//    |654|最大二叉树||||
+    func constructMaximumBinaryTree(_ nums: [Int]) -> TreeNode? {
+        return constructHelper(nums: nums, left: 0, right: nums.count - 1)
+    }
+    func constructHelper(nums:[Int],left:Int,right:Int) -> TreeNode?{
+        if left > right {
+            return nil
+        }
+        
+        var maxValue = Int.min
+        var index:Int = -1
+        
+        for x in left ... right {
+            if maxValue < nums[x] {
+                index = x
+                maxValue = nums[x]
+            }
+        }
+        
+        let node = TreeNode(maxValue)
+        
+        node.left = constructHelper(nums: nums, left: left, right: index - 1)
+        node.right = constructHelper(nums: nums, left: index + 1, right: right)
+        
+        return node
+    }
+}
+
+extension BinaryTree_Code{
+    // MARK: - 遍历
+//    前序遍历
+    func preOrder(_ root:TreeNode?){
+        guard let root = root else { return }
+        print(root.val)
+        preOrder(root.left)
+        preOrder(root.right)
+    }
+    func preOrder_List(_ root:TreeNode?){
+        var list:[TreeNode] = []
+        var node = root
+        
+        while node != nil || !list.isEmpty {
+            if node != nil {
+                print(node!.val)
+                list.append(node!)
+                node = node?.left
+            } else {
+                node = list.removeLast().right
+            }
+        }
+    }
+    
+//    中序遍历
+    func inOrder(_ root:TreeNode?){
+        guard let root = root else { return }
+        inOrder(root.left)
+        print(root.val)
+        inOrder(root.right)
+    }
+    
+    func inOrder_list(_ root:TreeNode?){
+        var list:[TreeNode] = []
+        var node = root
+        
+        while node != nil || !list.isEmpty {
+            if node != nil {
+                list.append(node!)
+                node = node?.left
+            } else {
+                node = list.removeLast()
+                print(node!.val)
+                node = node?.right
+            }
+        }
+    }
+//    后序遍历
+    func postOrder(_ root:TreeNode?){
+        guard let root = root else { return }
+        postOrder(root.left)
+        postOrder(root.right)
+        print(root.val)
+    }
+    
+//    func postOrder_list(_ root: TreeNode?) {
+//        var list:[TreeNode] = []
+//        var node = root
+//
+//        while node != nil || !list.isEmpty {
+//            if node != nil {
+//                list.append(node!)
+//                node = node?.left
+//            } else {
+//                node = list.removeLast()
+//            }
+//
+//        }
+//    }
+//    层序遍历 (广度优先遍历)
+    func treeTraverse_list(root:TreeNode?) -> ([Int]){
+        var res:[Int] = []
+        var list:[TreeNode] = []
+        
+        guard let root = root else { return res }
+        list.append(root)
+        
+        while !list.isEmpty {
+            let temp = list.removeFirst()
+            res.append(temp.val)
+            
+            if temp.left != nil {
+                list.append(temp.left!)
+            }
+            if temp.right != nil {
+                list.append(temp.right!)
+            }
+        }
+        return res
+    }
+    
+    
     
 }
