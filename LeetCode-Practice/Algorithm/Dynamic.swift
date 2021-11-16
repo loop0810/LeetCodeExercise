@@ -173,25 +173,59 @@ extension Dynamic_Code{
     }
     
     // 0-1背包问题
-    func bag(_ W:Int,_ weight:[Int],_ val:[Int]){
-        let list = [Int](repeating: 0, count: weight.count + 1)
-        var dp = [[Int]](repeating: list, count: val.count + 1)
+    // W:背包最大承重
+    // N:物品总数
+    // weight: 每个物品的重量
+    // val: 每个物品的价值
+    func bag(_ W:Int,_ N:Int,_ weight:[Int],_ val:[Int]){
+        let list = [Int](repeating: 0, count: W + 1)
+        var dp = [[Int]](repeating: list, count: N + 1)
         
-        for i in 0 ... weight.count  {
-            dp[0][i] = 0
-        }
-        for j in 0 ... val.count {
-            dp[j][0] = 0
-        }
-        
-        for i in 1 ... weight.count {
-            for j in 1 ... val.count {
-                if W - weight[i - 1] < 0{
+        for i in 1 ... N {
+            for j in 1 ... W {
+                if j - weight[i - 1] < 0{
+                    // 不将物品装入背包
                     dp[i][j] = dp[i - 1][j]
+                } else {
+                    // 装入或者不装入背包，择优
+                    dp[i][j] = max(dp[i - 1][j - weight[i - 1]] + val[i - 1],
+                                   dp[i - 1][j])
                 }
-                dp[i][j] = max(dp[i - 1][W - weight[j - 1]] + val[i],
-                               dp[i][j - 1])
+                
             }
         }
+    }
+    
+    // 416. 分割等和子集
+    func canPartition(_ nums: [Int]) -> Bool {
+        var sum = 0
+        nums.forEach{sum += $0}
+        if sum % 2 != 0 { return false }
+        
+        sum = sum / 2
+        let count = nums.count
+        
+        let list = [Bool](repeating: false, count: sum + 1)
+        var dp = [[Bool]](repeating: list, count: count + 1)
+        
+        for i in 0 ... count {
+            dp[i][0] = true
+        }
+        
+        for i in 1 ... count {
+            for j in 1 ... sum {
+                if j - nums[i - 1] < 0 {
+                    dp[i][j] = dp[i - 1][j]
+                } else {
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]]
+                }
+            }
+        }
+        return (dp.last?.last)!
+    }
+    
+    // 518. 零钱兑换 II
+    func change(_ amount: Int, _ coins: [Int]) -> Int {
+
     }
 }
