@@ -27,7 +27,10 @@ var dy = Dynamic_Code()
 //print(dy.longestCommonSubsequence("abcde", "ace"))
 //print(dy.longestPalindromeSubseq("bbbab"))
 //print(dy.minDistance("a", "c"))
-print(dy.canPartition([1,2,3,5]))
-
-//var tree = BinaryTree_Code()
+//print(dy.canPartition([1,2,3,5]))
+//print(dy.eraseOverlapIntervals([[1,2],[2,3],[3,4],[1,3]]))
+//print(dy.minMeetingRooms([[0,30],[5,10],[15,20]]))
+//print(dy.minMeetingRooms([[2,15],[36,45],[9,29],[16,23],[4,9]]))
+//print(dy.videoStitching([[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]], 10))
+print(dy.jump1([2,0,2,4,6,0,0,3]))
 

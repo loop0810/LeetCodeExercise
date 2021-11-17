@@ -23,7 +23,7 @@ class Dynamic_Code: NSObject {
     
 }
 
-
+// MARK: - 经典动态规划
 extension Dynamic_Code{
     // 斐波那契数列
     func fib(n:Int) -> Int {
@@ -171,7 +171,10 @@ extension Dynamic_Code{
         }
         return (dp.last?.last)!
     }
-    
+}
+
+// MARK: - 背包问题
+extension Dynamic_Code{
     // 0-1背包问题
     // W:背包最大承重
     // N:物品总数
@@ -247,5 +250,164 @@ extension Dynamic_Code{
             }
         }
         return (dp.last?.last)!
+    }
+}
+
+// MARK: - 贪心算法
+extension Dynamic_Code{
+    // 435. 无重叠区间
+    func eraseOverlapIntervals(_ intervals: [[Int]]) -> Int {
+        let list = intervals.sorted { val1, val2 in
+            return val1[1] < val2[1]
+        }
+        var count = 1
+        var temp_end:Int = list[0][1]
+        for l in list {
+            if l[0] >= temp_end {
+                count += 1
+                temp_end = l[1]
+            }
+        }
+        return intervals.count - count
+    }
+    // 452. 用最少数量的箭引爆气球
+    func findMinArrowShots(_ points: [[Int]]) -> Int {
+            let list = points.sorted {point1,point2 in return point1[1] < point2[1] }
+
+            var count = 1
+            var temp_end = list[0][1]
+
+            for l in list {
+                if l[0] > temp_end {
+                    count += 1
+                    temp_end = l[1]
+                }
+            }
+            return count
+        }
+    // 253. 会议室 II
+    func minMeetingRooms(_ intervals:[[Int]]) -> Int {
+        var begin:[Int] = []
+        var end:[Int] = []
+        
+        for inter in intervals {
+            begin.append(inter[0])
+            end.append(inter[1])
+        }
+        
+        begin.sort()
+        end.sort()
+        
+        var count = 0,res = 0,i = 0,j = 0
+        while i < intervals.count && j < intervals.count {
+            if begin[i] < end[j] {
+                count += 1
+                i += 1
+            } else {
+                count -= 1
+                j += 1
+            }
+            res = max(res, count)
+        }
+        return res
+    }
+    // 1024. 视频拼接
+    func videoStitching(_ clips: [[Int]], _ time: Int) -> Int {
+        var list = clips.sorted { clip1, clip2 in return clip1[0] <= clip2[0] }
+        list.sort { clip1, clip2 in return clip1[0] == clip2[0] && clip1[0] <= clip2[0] }
+        
+        var res = 0
+        var curEnd = 0,nextEnd = 0
+        var i = 0, n = list.count
+        
+        while i < n && list[i][0] <= curEnd {
+            while i < n && list[i][0] <= curEnd {
+                nextEnd = max(nextEnd, list[i][1])
+                i += 1
+            }
+            res += 1
+            curEnd = nextEnd
+            if curEnd >= time {
+                return res
+            }
+        }
+        return -1
+    }
+    // 55. 跳跃游戏
+    func canJump(_ nums: [Int]) -> Bool {
+        var farest = 0
+        
+        for i in 0 ..< nums.count - 1 {
+            farest = max(farest, i + nums[i])
+            
+            if farest <= i {
+                return false
+            }
+        }
+        return farest >= nums.count - 1
+    }
+    // 45. 跳跃游戏 II
+    func jump(_ nums: [Int]) -> Int {
+        var dp = [Int](repeating: nums.count, count: nums.count)
+        
+        return jumpHelper(nums,&dp, 0)
+    }
+    
+    func jumpHelper(_ nums:[Int],_ dp:inout [Int],_ p:Int) -> Int{
+        if p >= dp.count - 1 {
+            return 0
+        }
+        if dp[p] != dp.count {
+            return dp[p]
+        }
+        let step = nums[p]
+        
+        if step == 0 { return dp[p] }
+        
+        for i in 1 ... step {
+            let minStep = jumpHelper(nums, &dp, p + i)
+            
+            dp[p] = min(dp[p], minStep + 1)
+        }
+        return dp[p]
+    }
+    
+    func jump1(_ nums: [Int]) -> Int {
+        var end = 0,farthest = 0
+        var jumps = 0
+        for i in 0 ..< nums.count - 1 {
+            farthest = max(farthest, nums[i] + i)
+            if end == i {
+                jumps += 1
+                end = farthest
+            }
+        }
+        return jumps
+    }
+    // 134. 加油站
+    // 暴力解法
+    // 图解法
+    // 贪心算法
+    func canCompleteCircuit(_ gas: [Int], _ cost: [Int]) -> Int {
+        var sum = 0
+        for i in 0 ..< gas.count {
+            sum += gas[i]
+            sum -= cost[i]
+        }
+        
+        if sum < 0 { return -1 }
+
+        var tank = 0
+        var start = 0
+        
+        for i in 0 ..< gas.count {
+            tank += gas[i]
+            tank -= cost[i]
+            if tank < 0 {
+                tank = 0
+                start = i + 1
+            }
+        }
+        return start == gas.count ? 0 : start
     }
 }
