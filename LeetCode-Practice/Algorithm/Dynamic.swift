@@ -226,6 +226,26 @@ extension Dynamic_Code{
     
     // 518. 零钱兑换 II
     func change(_ amount: Int, _ coins: [Int]) -> Int {
-
+        if amount == 0 {
+            return 1
+        }
+        let n = coins.count
+        let list = [Int](repeating: 0, count: amount + 1)
+        var dp = [[Int]](repeating: list, count: n + 1)
+        
+        for i in 0 ... n {
+            dp[i][0] = 1
+        }
+        
+        for i in 1 ... n {
+            for j in 1 ... amount {
+                if j - coins[i - 1] < 0 {
+                    dp[i][j] = dp[i - 1][j]
+                } else {
+                    dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]]
+                }
+            }
+        }
+        return (dp.last?.last)!
     }
 }
