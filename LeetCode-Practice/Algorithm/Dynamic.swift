@@ -410,4 +410,74 @@ extension Dynamic_Code{
         }
         return start == gas.count ? 0 : start
     }
+    
+    // 1288. 删除被覆盖区间
+    func removeCoveredIntervals(_ intervals: [[Int]]) -> Int {
+        var list = intervals.sorted { val1, val2 in return val1[0] < val2[0] }
+        list.sort { val1, val2 in val1[0] == val2[0] && val1[1] > val2[1] }
+            
+        var left = list[0][0]
+        var right = list[0][1]
+        
+        var res = 0
+        
+        for i in 1 ..< list.count {
+            let l = list[i]
+            
+            if left <= l[0] && right >= l[1] {
+                res += 1
+            }
+            
+            if right >= l[0] && right <= l[1]  {
+                right = l[1]
+            }
+            
+            if right < l[0] {
+                left = l[0]
+                right = l[1]
+            }
+        }
+        return list.count - res
+    }
+    // 56. 合并区间
+    func merge(_ intervals: [[Int]]) -> [[Int]] {
+        let list = intervals.sorted {val1,val2 in return val1[0] < val2[0]}
+
+        var res:[[Int]] = []
+        res.append(list[0])
+        
+        for i in 1 ..< list.count {
+            let cur = list[i]
+            
+            if cur[0] <= res[res.count - 1][1]{
+                res[res.count - 1][1] = max(res[res.count - 1][1], cur[1])
+            } else {
+                res.append(cur)
+            }
+        }
+        
+        return res
+    }
+    // 986. 区间列表的交集
+    func intervalIntersection(_ firstList: [[Int]], _ secondList: [[Int]]) -> [[Int]] {
+        var i = 0,j = 0
+        var res = [[Int]]()
+        while i < firstList.count && j < secondList.count {
+            let f = firstList[i]
+            let s = secondList[j]
+            if s[0] <= f[1] && s[1] >= f[1] {
+                let l = [s[0],f[1]]
+                i += 1
+                res.append(l)
+            }
+            if f[0] <= s[1] && f[1] >= s[1] {
+                let l = [f[0],s[1]]
+                j += 1
+                res.append(l)
+            }
+            if f[1] < s[0] || s[1] < f[0] {
+                
+            }
+        }
+    }
 }
