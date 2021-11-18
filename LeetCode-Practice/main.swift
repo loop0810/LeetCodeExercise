@@ -34,5 +34,8 @@ var dy = Dynamic_Code()
 //print(dy.videoStitching([[0,2],[4,6],[8,10],[1,9],[1,5],[5,9]], 10))
 //print(dy.jump1([2,0,2,4,6,0,0,3]))
 //print(dy.removeCoveredIntervals([[1,4],[3,6],[1,3],[2,8]]))
-print(dy.merge([[1,3],[2,6],[8,10],[15,18]]))
+//print(dy.merge([[1,3],[2,6],[8,10],[15,18]]))
+
+var bt = BackTrace_Code()
+print(bt.canPartitionKSubsets([1739,5391,8247,236,5581,11,938,58,1884,823,686,1760,6498,6513,6316,2867],6))
 

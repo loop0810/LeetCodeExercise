@@ -16,6 +16,8 @@
 		75A06528272AD34A00B264A6 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A06527272AD34A00B264A6 /* List.swift */; };
 		75A1D49B2732039A00DA04B2 /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A1D49A2732039A00DA04B2 /* BinarySearch.swift */; };
 		75CA9C7F27423E43002982CE /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C7E27423E43002982CE /* Dynamic.swift */; };
+		75CA9C812745EF19002982CE /* BackTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C802745EF19002982CE /* BackTrace.swift */; };
+		75CA9C8327464D8C002982CE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C8227464D8C002982CE /* Math.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +43,8 @@
 		75A06527272AD34A00B264A6 /* List.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		75A1D49A2732039A00DA04B2 /* BinarySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearch.swift; sourceTree = "<group>"; };
 		75CA9C7E27423E43002982CE /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		75CA9C802745EF19002982CE /* BackTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTrace.swift; sourceTree = "<group>"; };
+		75CA9C8227464D8C002982CE /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,7 @@
 				7547CBAC2730DF2E00DD5238 /* Recursion.swift */,
 				75A1D49A2732039A00DA04B2 /* BinarySearch.swift */,
 				75CA9C7E27423E43002982CE /* Dynamic.swift */,
+				75CA9C802745EF19002982CE /* BackTrace.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -96,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				75A06520272AD33400B264A6 /* main.swift */,
+				75CA9C8227464D8C002982CE /* Math.swift */,
 				7547CBAB2730DEF700DD5238 /* DataStructure */,
 				7547CBAA2730DED100DD5238 /* Algorithm */,
 			);
@@ -161,6 +167,8 @@
 			files = (
 				75715CA3273DD7270000A92E /* BinaryTree.swift in Sources */,
 				7547CBAD2730DF2E00DD5238 /* Recursion.swift in Sources */,
+				75CA9C8327464D8C002982CE /* Math.swift in Sources */,
+				75CA9C812745EF19002982CE /* BackTrace.swift in Sources */,
 				751E3420272EE29800E95D1A /* Stack.swift in Sources */,
 				75CA9C7F27423E43002982CE /* Dynamic.swift in Sources */,
 				75A06521272AD33400B264A6 /* main.swift in Sources */,

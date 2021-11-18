@@ -251,6 +251,7 @@ extension Dynamic_Code{
         }
         return (dp.last?.last)!
     }
+    
 }
 
 // MARK: - 贪心算法
@@ -463,21 +464,18 @@ extension Dynamic_Code{
         var i = 0,j = 0
         var res = [[Int]]()
         while i < firstList.count && j < secondList.count {
-            let f = firstList[i]
-            let s = secondList[j]
-            if s[0] <= f[1] && s[1] >= f[1] {
-                let l = [s[0],f[1]]
-                i += 1
-                res.append(l)
+            let a0 = firstList[i][0],a1 = firstList[i][1]
+            let b0 = secondList[j][0],b1 = secondList[j][1]
+            
+            if b1 >= a0 && a1 >= b0 {
+                res.append([max(a0, b0),min(a1,b1)])
             }
-            if f[0] <= s[1] && f[1] >= s[1] {
-                let l = [f[0],s[1]]
+            if b1 < a1 {
                 j += 1
-                res.append(l)
-            }
-            if f[1] < s[0] || s[1] < f[0] {
-                
+            } else {
+                i += 1
             }
         }
+        return res
     }
 }
