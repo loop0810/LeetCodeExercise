@@ -18,6 +18,7 @@
 		75CA9C7F27423E43002982CE /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C7E27423E43002982CE /* Dynamic.swift */; };
 		75CA9C812745EF19002982CE /* BackTrace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C802745EF19002982CE /* BackTrace.swift */; };
 		75CA9C8327464D8C002982CE /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C8227464D8C002982CE /* Math.swift */; };
+		75CA9C8527476982002982CE /* DoublePoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75CA9C8427476982002982CE /* DoublePoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		75CA9C7E27423E43002982CE /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		75CA9C802745EF19002982CE /* BackTrace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackTrace.swift; sourceTree = "<group>"; };
 		75CA9C8227464D8C002982CE /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		75CA9C8427476982002982CE /* DoublePoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoublePoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				75A1D49A2732039A00DA04B2 /* BinarySearch.swift */,
 				75CA9C7E27423E43002982CE /* Dynamic.swift */,
 				75CA9C802745EF19002982CE /* BackTrace.swift */,
+				75CA9C8427476982002982CE /* DoublePoint.swift */,
 			);
 			path = Algorithm;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				75A06521272AD33400B264A6 /* main.swift in Sources */,
 				75A06528272AD34A00B264A6 /* List.swift in Sources */,
 				75A1D49B2732039A00DA04B2 /* BinarySearch.swift in Sources */,
+				75CA9C8527476982002982CE /* DoublePoint.swift in Sources */,
 				7547CBA9272FB6E100DD5238 /* Sort.swift in Sources */,
 				756C7C3D272BB5550032C881 /* NodeList.swift in Sources */,
 			);

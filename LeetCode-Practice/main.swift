@@ -18,7 +18,7 @@ import Foundation
 //print(binary.searchCount([1], 1))
 
 var re = Recursion_Code()
-print(re.fib(20))
+//print(re.fib(20))
 
 var dy = Dynamic_Code()
 //print(dy.fib(n: 20))
@@ -37,5 +37,29 @@ var dy = Dynamic_Code()
 //print(dy.merge([[1,3],[2,6],[8,10],[15,18]]))
 
 var bt = BackTrace_Code()
-print(bt.canPartitionKSubsets([1739,5391,8247,236,5581,11,938,58,1884,823,686,1760,6498,6513,6316,2867],6))
+//print(bt.canPartitionKSubsets([1739,5391,8247,236,5581,11,938,58,1884,823,686,1760,6498,6513,6316,2867],6))
 
+var dp = DoublePoint_Code()
+//print(dp.checkInclusion("abcdxabcde","abcdeabcdx"))
+//print(dp.findAnagrams("acdcaeccde","c"))
+var l2 = ListNode(2)
+var l7 = ListNode(7)
+l7.next = l2
+var l6 = ListNode(6)
+l6.next = l7
+var l5 = ListNode(5)
+l5.next = l6
+var l4 = ListNode(4)
+l4.next = l5
+var l3 = ListNode(3)
+l3.next = l4
+
+l2.next = l3
+var l1 = ListNode(1)
+l1.next = nil
+
+
+
+
+
+print(dp.removeNthFromEnd(l1, 1))
