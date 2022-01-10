@@ -54,59 +54,97 @@ extension BackTrace_Code{
     }
     // 698. 划分为k个相等的子集
     func canPartitionKSubsets(_ nums: [Int], _ k: Int) -> Bool {
-        if k > nums.count { return false }
+        if k > nums.count {return false}
         var sum = 0
-        for i in nums { sum += i }
-        if sum % k != 0 { return false}
+        for i in nums {sum += i}
+        if sum % k != 0 {return false}
         let target = sum / k
         
-        let bucket = [Int](repeating: 0, count: k)
+        var bucket = [Int](repeating: 0, count: k)
+        let l = nums.sorted{ nums1,nums2 in return nums1 > nums2 }
         
-        let l = nums.sorted {num1,num2 in return num1 > num2}
-        
-        return kSubsetsHelper(target, 0, bucket, l)
+        return canPartitionKSubsets_Helper(l, target, &bucket, 0)
     }
-    func kSubsetsHelper(_ target:Int,_ index:Int,_ bucket:[Int],_ nums:[Int]) -> Bool{
+    
+    func canPartitionKSubsets_Helper(_ nums: [Int],_ target: Int,_ bucket:inout [Int],_ index: Int) -> Bool{
         if index == nums.count {
-            for i in 0 ..< bucket.count {
-                if bucket[i] != target {
-                    return false
-                }
+            for i in bucket {
+                if i != target { return false}
             }
             return true
         }
         
-        var list = bucket
-        
-        for i in 0 ..< list.count {
-            if list[i] + nums[index] > target {
-                continue
-            }
-            list[i] += nums[index]
-            if (kSubsetsHelper(target, index + 1, list, nums)){ return true}
-            list[i] -= nums[index]
+        let num = nums[index]
+        for i in 0 ..< bucket.count {
+            if bucket[i] + num > target { continue }
+            bucket[i] = bucket[i] + num
+            if (canPartitionKSubsets_Helper(nums, target, &bucket, index + 1)) { return true }
+            bucket[i] = bucket[i] - num
         }
-        
         return false
     }
     
     // 78. 子集
     func subsets(_ nums: [Int]) -> [[Int]] {
-//        var res = [[Int]]()
-        return subsetsHelper(0, nums, [[]])
+        return subsets_Helper(nums, [[]], 0)
     }
-    func subsetsHelper(_ index:Int,_ nums:[Int],_ res:[[Int]]) -> [[Int]]{
-        if index == nums.count {
-            return res
-        }
-        var temp = [[Int]]()
-        for list in res {
-            temp.append(list)
-            var l = list
-            l.append(nums[index])
-            temp.append(l)
-        }
-        return subsetsHelper(index, nums, temp)
+    
+    func subsets_Helper(_ nums: [Int],_ res: [[Int]],_ index:Int) -> [[Int]]{
+        if index == nums.count { return res }
         
+        var temp = [[Int]]()
+        for i in res {
+            temp.append(i)
+            var list = i
+            list.append(nums[index])
+            temp.append(list)
+        }
+        return subsets_Helper(nums, temp, index + 1)
+    }
+    // 22.括号生成
+    func generateParenthesis(_ n: Int) -> [String] {
+        var res = [String]()
+        var s = ""
+        generateParenthesis_Helper(n, n, &s, &res)
+        return res
+    }
+    
+    func generateParenthesis_Helper(_ left: Int,_ right: Int,_ track:inout String,_ res:inout [String]) {
+        if right < left { return }
+        if left < 0 || right < 0 { return }
+        if left == 0 && right == 0 {
+            res.append(track)
+            return
+        }
+        
+        track.append("(")
+        generateParenthesis_Helper(left - 1, right, &track, &res)
+        track.removeLast()
+        
+        track.append(")")
+        generateParenthesis_Helper(left, right - 1, &track, &res)
+        track.removeLast()
+        
+    }
+    // 77.组合
+    func combine(_ n: Int, _ k: Int) -> [[Int]] {
+        if n <= 0 || k <= 0 { return [[]]}
+        var track = [Int]()
+        var res = [[Int]]()
+        combine_Helper(n, k,1, &track, &res)
+        return res
+    }
+    
+    func combine_Helper(_ n:Int,_ k:Int,_ index:Int,_ track:inout [Int],_ res:inout [[Int]]) {
+        if track.count == k {
+            res.append(track)
+            return
+        }
+        if index > n { return }
+        for i in index ... n {
+            track.append(i)
+            combine_Helper(n, k,i + 1 ,&track, &res)
+            track.removeLast()
+        }
     }
 }

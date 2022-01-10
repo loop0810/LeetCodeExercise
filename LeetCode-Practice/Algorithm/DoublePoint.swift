@@ -36,8 +36,34 @@ class DoublePoint_Code: NSObject {
             }
             return slow
         }
+        
+        func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+            var left = 0,right = nums.count - 1
+            let arr = nums.sorted()
+            while left < right {
+                if arr[left] + arr[right] < target {
+                    left += 1
+                } else if arr[left] + arr[right] > target {
+                    right -= 1
+                } else {
+                    var l = 0
+                    var r = 0
+                    for i in 0 ..< arr.count {
+                        if nums[i] == arr[left] {
+                            l = i
+                        }
+                        if nums[i] == arr[right] {
+                            r = i
+                        }
+                    }
+                    return [l,r]
+                }
+            }
+            return []
+        }
+    
     //    167.两数之和 II - 输入有序数组（中等）
-        func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+        func twoSum2(_ numbers: [Int], _ target: Int) -> [Int] {
             var left = 0,right = numbers.count - 1
             while left < right {
                 if numbers[left] + numbers[right] > target {
@@ -86,6 +112,22 @@ class DoublePoint_Code: NSObject {
             }
             return slow
         }
+    // 11.盛最多水的容器
+    func maxArea(_ height: [Int]) -> Int {
+        var left = 0, right = height.count - 1
+        var res = 0
+        while left < right {
+            let cur_area = min(height[left],height[right]) * (right - left)
+            res = max(res, cur_area)
+            
+            if height[left] < height[right] {
+                left += 1
+            } else {
+                right -= 1
+            }
+        }
+        return res
+    }
 }
 
 // MARK: - 滑动窗口

@@ -31,18 +31,56 @@ class Node: NSObject {
     // MARK: - 简单
 //    |206|反转链表||阿里||
     func reverseList(_ head: ListNode?) -> ListNode? {
-        var pre:ListNode? = nil
-        var cur:ListNode? = head
-        
-        while cur != nil {
-            let temp = cur?.next
-            cur?.next = pre
-            pre = cur
-            cur = temp
-            
-        }
-        return pre
+        // 遍历实现
+//        var pre:ListNode? = nil
+//        var cur:ListNode? = head
+//
+//        while cur != nil {
+//            let temp = cur?.next
+//            cur?.next = pre
+//            pre = cur
+//            cur = temp
+//        }
+//        return pre
+        // 递归实现
+        if (head == nil || head?.next == nil) { return head}
+        let node = reverseList(head?.next)
+        head?.next?.next = head
+        head?.next = nil
+        return node
     }
+    // 反转前N个节点
+    var successor:ListNode? = nil
+    func reverseListN(_ head: ListNode?,_ n:Int) -> ListNode? {
+        // 迭代实现
+//        var pre:ListNode? = nil
+//        var cur:ListNode? = head
+//        while (cur!.val != n) {
+//            let temp = cur?.next
+//            cur?.next = pre
+//            pre = cur
+//            cur = temp
+//        }
+//        return pre
+        if n == 1 {
+            successor = head?.next
+            return head
+        }
+        let node = reverseListN(head?.next, n - 1)
+        head?.next?.next = head
+        head?.next = successor
+        return node
+    }
+    // 反转链表区间
+    func reverseBetween(_ head: ListNode?, _ left: Int, _ right: Int) -> ListNode? {
+        if left == 1 {
+            return reverseListN(head, right)
+        }
+        head?.next = reverseBetween(head?.next, left - 1, right - 1)
+        return head
+    }
+    // K个一组反转链表
+    
 //    |21|合并两个有序链表||阿里||
     func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         var newL1 = l1
