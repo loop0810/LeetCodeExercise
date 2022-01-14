@@ -73,16 +73,16 @@ class t: NSObject {
     //合并n个有序数组
     //归并排序
     //数组中子数组 和最大值
-    func maxSubArray(_ nums: [Int]) -> Int {
-        var dp = [Int](repeating: 0, count: nums.count)
-        dp[0] = nums[0]
-        var res = dp[0]
-        for i in 1 ..< nums.count {
-            dp[i] = max(nums[i], dp[i - 1] + nums[i])
-            res = max(res, dp[i])
-        }
-        return res
-    }
+//    func maxSubArray(_ nums: [Int]) -> Int {
+//        var dp = [Int](repeating: 0, count: nums.count)
+//        dp[0] = nums[0]
+//        var res = dp[0]
+//        for i in 1 ..< nums.count {
+//            dp[i] = max(nums[i], dp[i - 1] + nums[i])
+//            res = max(res, dp[i])
+//        }
+//        return res
+//    }
     //1g TXT 文件 读取 从 900M到901M的内存
     //查看 IPV4 地址是否合法
     func is_ipv4(_ address:String) -> Bool{
@@ -316,6 +316,22 @@ class t: NSObject {
         return left == nil ? right : left
     }
 //    53. 最大子序和    39
+    func maxSubArray(_ nums: [Int]) -> Int {
+        let count = nums.count
+        if count == 0 {
+            return 0
+        }
+        var dp = [Int](repeating:Int.min,count: count)
+        dp[0] = nums[0]
+        for i in 1 ..< count {
+            dp[i] = max(nums[i],dp[i - 1] + nums[i])
+        }
+        var res = Int.min
+        for x in dp {
+            res = max(res,x)
+        }
+        return res
+    }
 //    42. 接雨水    38
 //    O(n)
     func trap(_ height: [Int]) -> Int {
@@ -508,6 +524,22 @@ class t: NSObject {
         return p!.val == q!.val && isSymmetric_Helper(p!.left, q!.right) && isSymmetric_Helper(p!.right, q!.left)
     }
 //    300. 最长上升子序列    28
+    func lengthOfLIS(_ nums: [Int]) -> Int {
+        var dp = [Int](repeating:1, count:nums.count)
+        
+        for i in 0 ..< nums.count {
+            for j in 0 ..< i {
+                if nums[i] > nums[j] {
+                    dp[i] = max(dp[i],dp[j] + 1)
+                }
+            }
+        }
+        var res = 0
+        for x in dp {
+            res = max(x,res)
+        }
+        return res
+    }
 //    20. 有效的括号    28
     func isValid(_ s: String) -> Bool {
         var queue = [Character]()
@@ -596,6 +628,21 @@ class t: NSObject {
 //    76. 最小覆盖子串    18
 //    122. 买卖股票的最佳时机 II    18
 //    19. 删除链表的倒数第N个节点    18
+    func removeNthFromEnd(_ head: ListNode?, _ n: Int) -> ListNode? {
+        var slow = head,fast = head
+        for _ in 0 ..< n {
+            fast = fast?.next
+        }
+        if fast == nil {
+            return head?.next
+        }
+        while slow != nil && fast != nil {
+            slow = slow?.next
+            fast = fast?.next
+        }
+        slow?.next = slow?.next?.next
+        return head
+    }
 //    169. 多数元素    18
 //    剑指 Offer 22. 链表中倒数第k个节点    18
 //    39. 组合总和    18
@@ -633,6 +680,13 @@ class t: NSObject {
 //    剑指 Offer 09. 用两个栈实现队列    11
 //    695. 岛屿的最大面积    11
 //    144. 二叉树的前序遍历    11
+    func preorderTraversal(_ root: TreeNode?) -> [Int] {
+        guard let root = root else {return []}
+        var list = [Int]()
+        list += preorderTraversal(root.left)
+        list += preorderTraversal(root.right)
+        return list
+    }
 //    394. 字符串解码    11
 //    8. 字符串转换整数 (atoi)    11
 //    24. 两两交换链表中的节点    11

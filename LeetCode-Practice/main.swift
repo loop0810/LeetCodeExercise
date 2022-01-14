@@ -11,8 +11,9 @@ var T = t()
 //print(T.twoSum([3,2,4], 6))
 //print(T.threeSum([-1,0,1,2,-1,-4]))
 //print(T.addStrings("123", "789"))
-print(T.isValid("(]"))
-print(T.mySqrt(8))
+//print(T.isValid("(]"))
+//print(T.mySqrt(8))
+print(T.maxSubArray([-2,1,-3,4,-1,2,1,-5,4]))
 
 //print(T.threeSum([3,2,4,1,3,2,6,7,1,2,5,3,8,6,2,1], 9))
 var l = [1,2,3,0,0,0]
